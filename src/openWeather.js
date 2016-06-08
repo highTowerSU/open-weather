@@ -60,7 +60,7 @@ Licensed under the MIT license
 		var s = plugin.settings;
 
 		// define basic api endpoint
-		apiURL = '//api.openweathermap.org/data/2.5/weather?lang='+s.lang;
+		apiURL = 'owm.php?lang='+s.lang;
 
 		// if city isn't null
 		if(s.city != null) {
@@ -94,15 +94,15 @@ Licensed under the MIT license
 			// define hours
 			var hours = date.getHours();
 
-			// if hours are greater than 12
-			if(hours > 12) {
+			// // if hours are greater than 12
+			// if(hours > 12) {
 
-				// calculate remaining hours in the day
-				hoursRemaining = 24 - hours;
+				// // calculate remaining hours in the day
+				// hoursRemaining = 24 - hours;
 
-				// define hours as the reamining hours subtracted from a 12 hour day
-				hours = 12 - hoursRemaining;
-			}
+				// // define hours as the reamining hours subtracted from a 12 hour day
+				// hours = 12 - hoursRemaining;
+			// }
 
 			// define minutes
 			var minutes = date.getMinutes();
@@ -240,7 +240,7 @@ Licensed under the MIT license
 					} else {
 
 						// define icon URL using default icon
-						var iconURL = 'http://openweathermap.org/img/w/'+data.weather[0].icon+'.png';
+						var iconURL = '//openweathermap.org/img/w/'+data.weather[0].icon+'.png';
 					}
 
 					// set iconTarget src attribute as iconURL
@@ -258,7 +258,7 @@ Licensed under the MIT license
 				if(s.windSpeedTarget != null) {
 
 					// set wind speed
-					$(s.windSpeedTarget).text(Math.round(data.wind.speed) + ' Mps');
+					$(s.windSpeedTarget).text(Math.round(data.wind.speed * 1.609344) + ' km/h');
 				}
 
 				// if humidityTarget isn't null
@@ -274,7 +274,8 @@ Licensed under the MIT license
 					var sunrise = formatTime(data.sys.sunrise);
 
 					// set humidity
-					$(s.sunriseTarget).text(sunrise + ' AM');
+					$(s.sunriseTarget).text(sunrise);
+					// $(s.sunriseTarget).text(sunrise + ' AM');
 				}
 
 				// if sunriseTarget isn't null
@@ -283,7 +284,8 @@ Licensed under the MIT license
 					var sunset = formatTime(data.sys.sunset);
 
 					// set humidity
-					$(s.sunsetTarget).text(sunset + ' PM');
+					$(s.sunsetTarget).text(sunset);
+					// $(s.sunsetTarget).text(sunset + ' PM');
 				}
 
 				// run success callback
